@@ -76,7 +76,8 @@ public class IndicatorRenderer {
         DamageHandler.indicaors.forEach(indicator -> {
             if(client.player != null) {
                 Vec3d playerPos = client.player.getPos();
-                Vec3d damagePos = indicator.isSourceMovable && indicator.source != null && indicator.source.getAttacker().getPos() != null
+                Vec3d damagePos = indicator.isSourceMovable && indicator.source != null && indicator.source.getAttacker() != null
+                    && indicator.source.getAttacker().getPos() != null
                         ? indicator.source.getAttacker().getPos()
                         : indicator.pos;
 
