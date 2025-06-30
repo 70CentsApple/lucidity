@@ -95,6 +95,8 @@ public class IndicatorRenderer {
 
                 float a = calculateAlpha(client.world.getTime(),indicator.lifeTime,LucidityConfig.damageIndicatorLifeTime) / 255f;
 
+                var color = new Color(r,g,b,((a>=1)?1:(a<=0?0:a)));
+
                 context.getMatrices().push();
                 context.getMatrices().translate(indicatorX, indicatorY, 0.0F);
                 context.getMatrices().multiply(RotationAxis.POSITIVE_Z.rotation(radians));
@@ -102,7 +104,7 @@ public class IndicatorRenderer {
 
                 RenderSystem.enableBlend();
                 context.drawTexture(RenderLayer::getGuiTextured,indicatorTexture,
-                        (int) (indicatorX - textureWidth / 2), (int) (indicatorY - textureWidth / 2), 0, 0, textureWidth, textureWidth, textureWidth, textureWidth,new Color(r,g,b,a).getRGB());
+                        (int) (indicatorX - textureWidth / 2), (int) (indicatorY - textureWidth / 2), 0, 0, textureWidth, textureWidth, textureWidth, textureWidth, color.getRGB());
                 RenderSystem.disableBlend();
                 context.getMatrices().pop();
             }
